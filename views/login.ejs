@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+  
+    <form action="/login" method="POST">
+        <div class="container">
+          <!-- Giant Login text -->
+          <div class="Login_heading">
+            <h1>Login</h1>
+          </div>
+          
+          <hr>
+
+          <%if (error) { %>
+            <%= error %> <br><br>
+            <% } %>
+
+          <!-- Input Email -->
+            <!-- <label class="email" for="email"><b>Email</b></label>
+            <br> -->
+            <input type="email" placeholder="Enter Email" name="email" id="email" required><br><br>
+
+          <!-- Input Password -->
+            <!-- <label for="psw"><b>Password</b></label>
+            <br> -->
+            <input type="password" placeholder="Enter Password" name="psw" id="psw" required><br><br>
+
+
+          <!-- Submit Button -->
+          <button type="submit" class="loginbutton">Login</button>
+
+
+          <div class="noAccount">
+            <!-- Register page coming soon -->
+            <br>
+            <a href="/register">No account? register</a>  
+          </div>
+
+        </div>
+    
+      </form>
+
+
+</body>
+</html>

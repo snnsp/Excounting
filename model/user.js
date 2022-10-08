@@ -9,18 +9,17 @@ const AccountSchema = new mongoose.Schema({
         Expense: { type: Number },
         createdDate: {type: Date}
     }]
-})
+});
 
 const UserSchema = new mongoose.Schema({
     firstname: {type: String, default: null},
     lastname: {type: String, default: null},
-    telephone: {type: String, default: null},
-    email: {type: String, unique: true},
+    username: {type: String, unique: true},
     password: {type: String},
     Account: {type: AccountSchema}
     
-})
+});
 
-module.exports = { user: mongoose.model('user', UserSchema), Account: mongoose.model('Account', AccountSchema) };
+module.exports = { User: mongoose.model('user', UserSchema), Account: mongoose.model('Account', AccountSchema) };
 
 

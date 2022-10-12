@@ -9,6 +9,7 @@ const TokenVerity = require('./auth/TokenVerity')
 
 const loginController = require('./controller/loginController')
 const dashboardController = require('./controller/dashboardController')
+const AccountController = require('./controller/AccountController')
 
 app.use(express.json())
 app.use(bodyParser.urlencoded({ extended:true }))
@@ -23,8 +24,11 @@ app.get('/login', loginController.getLogin)
 app.post('/login', loginController.postLogin)
 app.get('/register', loginController.getRegister)
 app.post('/register', loginController.postRegister)
+app.get('/logout', loginController.getLogout)
 
 app.get('/dashboard', TokenVerity, dashboardController.getDashboard)
+
+app.post('/AddBalance', TokenVerity, AccountController.postAddBalance)
 
 
 module.exports = app

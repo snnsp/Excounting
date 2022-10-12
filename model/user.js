@@ -1,25 +1,18 @@
 const mongoose = require('mongoose')
 
-const AccountSchema = new mongoose.Schema({
-    Income:[{
-        Income: { type: Number },
-        createdDate: {type: Date}
-    }],
-    Expense:[{
-        Expense: { type: Number },
+const UserSchema = new mongoose.Schema({
+    firstname: {type: String, default: null},
+    lastname: {type: String, default: null},
+    username: {type: String,},
+    password: {type: String},
+    Balance:[{
+        Description: {type: String},
+        Amount: { type: Number },
+        Type: {type: String},
         createdDate: {type: Date}
     }]
 });
 
-const UserSchema = new mongoose.Schema({
-    firstname: {type: String, default: null},
-    lastname: {type: String, default: null},
-    username: {type: String, unique: true},
-    password: {type: String},
-    Account: {type: AccountSchema}
-    
-});
-
-module.exports = { User: mongoose.model('user', UserSchema), Account: mongoose.model('Account', AccountSchema) };
+module.exports =  mongoose.model('user', UserSchema);
 
 

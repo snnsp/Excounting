@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser =  require("body-parser")
-const {Account, User} = require('../model/user');
+const User = require('../model/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const path=require("path")
@@ -27,7 +27,7 @@ module.exports = {
             const username = req.body.username //Get request email
             const password =req.body.psw //Get request password
             const user = await User.findOne({ username }); 
-            if (user && (await bcrypt.compare(password, user.password))) { // IF found email check the password
+            if (user && (await bcrypt.compare(password, user.password))) { // IF found user check the password
                 // Create token
                 const token = jwt.sign(
                   { user_id: user._id, 
@@ -41,9 +41,9 @@ module.exports = {
 
                 user.token = token;
                 res.cookie("access_token", user.token, { expires: new Date(Date.now() + 9000000), httpOnly: true, secure: true }) //Create cookies
-                return res.status(200).redirect('/dashboard') //If user is normal user
+                return res.status(200).redirect('/dashboard') 
               }
-              return res.render("login", {error: "Invalid Username or password please try again"}); //Email or password is wrong
+              return res.render("login", {error: "Invalid Username or password please try again"});
     
         }
         catch(error){
@@ -80,7 +80,8 @@ module.exports = {
                 firstname: firstname,
                 lastname: lastname,
                 username: username,
-                password: encrypted_password
+                password: encrypted_password,
+                Account: []
             })
             const token = jwt.sign(
                 { user_id: user._id, username },
@@ -95,5 +96,15 @@ module.exports = {
         catch(err){
             console.log(err)
         }    
+    },
+    getLogout: (req,res)=>{ //Get logout 
+        cookie = req.cookies; //Get the cookie
+        for (var prop in cookie) {
+            if (!cookie.hasOwnProperty(prop)) {
+                continue;
+            }    
+            res.cookie(prop, '', {expires: new Date(0)}); //Destroy cookie
+        }
+        res.redirect('/login'); //Redirect back to login page
     }
 }

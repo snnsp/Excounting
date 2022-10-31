@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-FROM gcr.io/distroless/nodejs:16 AS runner
+FROM node-base AS runner
 WORKDIR /app
 
 ENV PORT 8000
@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 8000
 
 # Run app command
-CMD ["index.js"]
+CMD ["npm", "start"]

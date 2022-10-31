@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    image: ghcr.io/snnsp/excounting:master
+    container_name: excounting_web
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30 excounting_web

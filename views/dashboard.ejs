@@ -1,64 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Page</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div id="Balance">
-        <table>
-            <thead>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Income</th>
-              <th>Expense</th>
-            </thead>
-            <% for(var i=0; i < user.Balance.length; i++) { %>
-                <% if(user.Balance[i].Type == 'Income'){ %>
-                <tr style="color: Green;">
-                    <td><%= user.Balance[i].createdDate %></td>
-                    <td><%= user.Balance[i].Description %></td>
-                    <td><%= user.Balance[i].Amount %></td>
-                    <td></td>
-                </tr>
-                <% } else{ %>  
-                <tr style="color: Red">
-                    <td><%= user.Balance[i].createdDate %></td>
-                    <td><%= user.Balance[i].Description %></td>
-                    <td></td>
-                    <td><%= user.Balance[i].Amount %></td>  
-                </tr>
-                <% } %>
-             <% } %>    
-        </table>
-          
+      <table>
+        <thead>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Income</th>
+          <th>Expense</th>
+        </thead>
+        <% for(var i=0; i < user.Balance.length; i++) { %> <% if(user.Balance[i].Type == 'Income'){ %>
+        <tr style="color: Green">
+          <td><%= user.Balance[i].createdDate %></td>
+          <td><%= user.Balance[i].Description %></td>
+          <td><%= user.Balance[i].Amount %></td>
+          <td></td>
+        </tr>
+        <% } else{ %>
+        <tr style="color: Red">
+          <td><%= user.Balance[i].createdDate %></td>
+          <td><%= user.Balance[i].Description %></td>
+          <td></td>
+          <td><%= user.Balance[i].Amount %></td>
+        </tr>
+        <% } %> <% } %>
+      </table>
     </div>
 
     <div id="AddData">
-        <form action="/AddBalance" method="POST">
-            <label for="Description">Description:</label>
-            <input type="text" placeholder="Description" name ="Description" id="Description" required>
+      <form action="/AddBalance" method="POST">
+        <label for="Description">Description:</label>
+        <input type="text" placeholder="Description" name="Description" id="Description" required />
 
-            <label for="Type">Type:</label>
-            <select id="Type" name="Type">
-                <option value="Income">Income</option>
-                <option value="Expense">Expense</option>
-            </select>
+        <label for="Type">Type:</label>
+        <select id="Type" name="Type">
+          <option value="Income">Income</option>
+          <option value="Expense">Expense</option>
+        </select>
 
-            <input type="Number" step="0.01" placeholder="Balance" name="Balance" id="Balance" required>
-            <button type="submit" >Add Balance</button>
-        </form>
+        <input type="Number" step="0.01" placeholder="Balance" name="Balance" id="Balance" required />
+        <button type="submit">Add Balance</button>
+      </form>
     </div>
 
     <form action="/logout" method="get">
-        <button name="logout" value="logout">Logout</button>
+      <button name="logout" value="logout">Logout</button>
     </form>
-
-</body>
-
+  </body>
 </html>

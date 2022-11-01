@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -48,6 +52,56 @@
         <input type="Number" step="0.01" placeholder="Balance" name="Balance" id="Balance" required />
         <button type="submit">Add Balance</button>
       </form>
+    </div>
+
+    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#MonthlyReport">
+      Get Monthly Report
+    </button>
+    
+    <div class="modal fade" id="MonthlyReport" tabindex="-1" role="dialog" aria-labelledby="MonthlyReportLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="MonthlyReportLabel">Monthly Report of <%= MonthlyReportDate %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <table>
+            <thead>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Income</th>
+              <th>Expense</th>
+            </thead>
+            <% for(var i=0; i < Balance.length; i++) { %> <% if(Balance[i].Type == 'Income'){ %>
+              <tr style="color: Green">
+                <td><%= Balance[i].createdDate %></td>
+                <td><%= Balance[i].Description %></td>
+                <td><%= Balance[i].Amount %></td>
+                <td></td>
+              </tr>
+              <% } else{ %>
+              <tr style="color: Red">
+                <td><%= Balance[i].createdDate %></td>
+                <td><%= Balance[i].Description %></td>
+                <td></td>
+                <td><%= Balance[i].Amount %></td>
+              </tr>
+              <% } %> <% } %>
+            </table>
+            <br>
+            <p>Total Income for <%= MonthlyReportDate %> is <%= TotalIncome%></p>
+            <p>Total Expense for <%= MonthlyReportDate %> is <%= TotalExpense%></p>
+            <p>Total Left for <%= MonthlyReportDate %> is <%= TotalLeft%></p>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <form action="/logout" method="get">

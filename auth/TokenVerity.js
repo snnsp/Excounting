@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;
 
   if (!token) {
-    return res.status(401).send("No Token");
+    return res.status(403).send("No Token");
   }
   try {
     const decoded = jwt.verify(token, config.TOKEN_KEY);

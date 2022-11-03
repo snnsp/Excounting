@@ -41,6 +41,7 @@ module.exports = {
 
                 user.token = token;
                 res.cookie("access_token", user.token, { expires: new Date(Date.now() + 9000000), httpOnly: true, secure: true }) //Create cookies
+                console.log("Created Cookies")
                 return res.status(200).redirect('/dashboard') 
               }
               return res.render("login", {error: "Invalid Username or password please try again"});

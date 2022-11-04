@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group Expense Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <a href="/dashboard/">Dashboard</a> |
+        <a href="/GroupExpense/">Group Sharing</a> |
+    </nav>
+
+    <main>
+        <table>
+            <thead>
+                <th>Group Name</th>
+                <th>Group Leader</th>
+                <th>Total Price</th>
+                <th>Action</th>
+            </thead>
+            <% for(var i=0; i < group.length; i++) { %>
+                <tr>    
+                    <td><%= group[i].GroupName %></td>
+                    <td><%= group[i].GroupLeader.firstname %>  <%= group[i].GroupLeader.lastname %></td>
+                    <td><%= group[i].AmountToPaid %></td>
+                    <td></td>
+                </tr>
+            <% } %>
+        </table>
+    </main>
+
+    <div id="Manage">
+        <div id="CreateNewGroup">
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#CreateGroup">
+                Create new Group
+            </button>
+
+            <div class="modal fade" id="CreateGroup" tabindex="-1" role="dialog" aria-labelledby="CreateGroupLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="CreateGroupLabel">Create new Group</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/GroupExpense/create" method = "POST">
+                            <div class="modal-body">
+                                <label>Group name:</label>
+                                <input type="text" name="GroupName">
+                                <label>Total cost:</label>
+                                <input type="Number" name="TotalCost">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" >Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form action="/logout" method="get">
+        <button name="logout" value="logout">Logout</button>
+    </form>
+</body>
+
+</html>

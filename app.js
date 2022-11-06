@@ -6,6 +6,7 @@ const app = express()
 const bodyParser =  require("body-parser")
 const cookieParser = require("cookie-parser");
 const TokenVerity = require('./auth/TokenVerity')
+const GroupExpenseVerify = require('./auth/GroupExpenseVerify')
 
 const loginController = require('./controller/loginController')
 const dashboardController = require('./controller/dashboardController')
@@ -31,6 +32,10 @@ app.get('/dashboard', TokenVerity, dashboardController.getDashboard)
 
 app.get('/GroupExpense', TokenVerity, groupExpenseController.getGroupExpense)
 app.post('/GroupExpense/create', TokenVerity, groupExpenseController.createNewGroupExpense)
+app.get('/GroupExpense/:groupID', TokenVerity, GroupExpenseVerify.verifyGroupExpense, groupExpenseController.getGroupDetails)
+app.post('/GroupExpense/addMember/:groupID', TokenVerity, GroupExpenseVerify.verifyGroupExpense, groupExpenseController.AddNewMember)
+app.post('/GroupExpense/ActivateGroup/:groupID', TokenVerity, GroupExpenseVerify.verifyGroupExpense, groupExpenseController.ActivateGroup)
+app.get('/GroupExpense/Approve/:groupID/:userID', TokenVerity, GroupExpenseVerify.verifyGroupExpense, groupExpenseController.ApproveExpense)
 
 app.post('/AddBalance', TokenVerity, AccountController.postAddBalance)
 

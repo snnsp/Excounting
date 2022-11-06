@@ -20,11 +20,13 @@
     </nav>
 
     <main>
+        <p>YourID: <%= user.user_id%></p>
         <table>
             <thead>
                 <th>Group Name</th>
                 <th>Group Leader</th>
                 <th>Total Price</th>
+                <th>Group Status</th>
                 <th>Action</th>
             </thead>
             <% for(var i=0; i < group.length; i++) { %>
@@ -32,7 +34,8 @@
                     <td><%= group[i].GroupName %></td>
                     <td><%= group[i].GroupLeader.firstname %>  <%= group[i].GroupLeader.lastname %></td>
                     <td><%= group[i].AmountToPaid %></td>
-                    <td></td>
+                    <td><%= group[i].GroupStatus %></td>
+                    <td><a href="/GroupExpense/<%= group[i]._id%>">View Details</a></td>
                 </tr>
             <% } %>
         </table>

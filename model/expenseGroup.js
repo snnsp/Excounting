@@ -12,7 +12,7 @@ const expenseGroupSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "user"
         },
-        AmountToPaid: {type: Number, default: NaN},
+        AmountToPaid: {type: Number},
         PaidStatus: {type: Boolean, default: false}
         }
     ],

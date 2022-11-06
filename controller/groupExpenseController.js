@@ -24,8 +24,7 @@ module.exports = {
         const group = await GroupExpense.find({$or:[
             {GroupLeader: req.user.user_id},
             {"GroupMember.Member": req.user.user_id}
-        ]}).populate('GroupLeader', 'firstname lastname')
-        console.log(group) 
+        ]}).populate('GroupLeader', 'firstname lastname').populate('GroupMember.Member', 'firstname lastname')
 
         res.render('groupExpense',{
             group: group
@@ -40,7 +39,8 @@ module.exports = {
         const group = await GroupExpense.create({
             GroupName: req.body.GroupName,
             GroupLeader: req.user.user_id,
-            AmountToPaid: req.body.TotalCost
+            AmountToPaid: req.body.TotalCost,
+            "GroupMember.0.Member": req.user.user_id
         })
         res.redirect('/GroupExpense')
     }

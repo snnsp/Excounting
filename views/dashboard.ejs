@@ -6,64 +6,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+      .navbar-color {
+            background-color: rgb(255, 212, 174);
+        }
+      .boda {
+        background-color: lightgoldenrodyellow;
+      }
+      .btn-monthly{
+        background-color: #b3cf99;
+         
+      }
+      .btn-balance{
+        background-color: #c7dbd5;
+      }
+      .btn-logout{
+        background-color: rgb(207, 188, 207);
+      }
+      .modal-header{
+            background-color: black;
+        }
+      .modal-footer{
+            background-color: black;
+        }
+      
+    </style>
   </head>
 
-  <body>
-
-    <nav>
-      <a href="/dashboard/">Dashboard</a> |
-      <a href="/GroupExpense/">Group Sharing</a> |
-      </nav>
-
+  <body class="p-3 mb-2 text-white boda">
+    
+    <nav class="navbar navbar-color navbar-expand-lg ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Excounting</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/dashboard/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/dashboard/">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/GroupExpense/">Group Sharing</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br>
     <div id="Balance">
-      <table>
+      <table class="table table-hover table-striped table-dark">
         <thead>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Income</th>
-          <th>Expense</th>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Income</th>
+            <th scope="col">Expense</th>
+          </tr>
         </thead>
-        <% for(var i=0; i < user.Balance.length; i++) { %> <% if(user.Balance[i].Type == 'Income'){ %>
-        <tr style="color: Green">
-          <td><%= user.Balance[i].createdDate %></td>
-          <td><%= user.Balance[i].Description %></td>
-          <td><%= user.Balance[i].Amount %></td>
-          <td></td>
-        </tr>
-        <% } else{ %>
-        <tr style="color: Red">
-          <td><%= user.Balance[i].createdDate %></td>
-          <td><%= user.Balance[i].Description %></td>
-          <td></td>
-          <td><%= user.Balance[i].Amount %></td>
-        </tr>
-        <% } %> <% } %>
+        <tbody>
+          <% for(var i=0; i < user.Balance.length; i++) { %> <% if(user.Balance[i].Type == 'Income'){ %>
+          <tr style="color: rgb(88, 191, 231)">
+            <th scope="row"><%= i + 1 %></th>
+            <td><%= user.Balance[i].createdDate %></td>
+            <td><%= user.Balance[i].Description %></td>
+            <td><%= user.Balance[i].Amount %></td>
+            <td></td>
+          </tr>
+          <% } else{ %>
+          <tr style="color: rgb(253, 163, 178)">
+            <th scope="row"><%= i + 1 %></th>
+            <td><%= user.Balance[i].createdDate %></td>
+            <td><%= user.Balance[i].Description %></td>
+            <td></td>
+            <td><%= user.Balance[i].Amount %></td>
+          </tr>
+          <% } %> <% } %>
+        </tbody>
       </table>
     </div>
 
     <div id="AddData">
       <form action="/AddBalance" method="POST">
-        <label for="Description">Description:</label>
-        <input type="text" placeholder="Description" name="Description" id="Description" required />
+        <label for="Description" style="color: black;">Description:</label>
+        <input type="text" placeholder="Description" name="Description" id="Description" class="text-dark"  required />
 
-        <label for="Type">Type:</label>
-        <select id="Type" name="Type">
+        <label for="Type" style="color: black;">Type:</label>
+        <select id="Type" name="Type" class="text-dark">
           <option value="Income">Income</option>
           <option value="Expense">Expense</option>
         </select>
 
-        <input type="Number" step="0.01" placeholder="Balance" name="Balance" id="Balance" required />
-        <button type="submit">Add Balance</button>
+        <input type="Number" step="0.01" placeholder="Balance" name="Balance" id="Balance" class="text-dark" required />
+        <button type="submit" class="text-dark btn-balance">Add Balance</button>
       </form>
     </div>
 
-    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#MonthlyReport">
+     
+    <button type="button" class="btn btn-monthly btn-sm" data-bs-toggle="modal" data-bs-target="#MonthlyReport">
       Get Monthly Report
     </button>
-    
+
     <div class="modal fade" id="MonthlyReport" tabindex="-1" role="dialog" aria-labelledby="MonthlyReportLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -73,34 +125,64 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-          <table>
-            <thead>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Income</th>
-              <th>Expense</th>
-            </thead>
-            <% for(var i=0; i < Balance.length; i++) { %> <% if(Balance[i].Type == 'Income'){ %>
-              <tr style="color: Green">
-                <td><%= Balance[i].createdDate %></td>
-                <td><%= Balance[i].Description %></td>
-                <td><%= Balance[i].Amount %></td>
-                <td></td>
-              </tr>
-              <% } else{ %>
-              <tr style="color: Red">
-                <td><%= Balance[i].createdDate %></td>
-                <td><%= Balance[i].Description %></td>
-                <td></td>
-                <td><%= Balance[i].Amount %></td>
-              </tr>
-              <% } %> <% } %>
+          <div class="modal-body" style="background-color: black;">
+            <table class="table table-hover table-striped table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Income</th>
+                  <th scope="col">Expense</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i=0; i < user.Balance.length; i++) { %> <% if(user.Balance[i].Type == 'Income'){ %>
+                <tr style="color: rgb(88, 191, 231)">
+                  <th scope="row"><%= i + 1 %></th>
+                  <td><%= user.Balance[i].createdDate %></td>
+                  <td><%= user.Balance[i].Description %></td>
+                  <td><%= user.Balance[i].Amount %></td>
+                  <td></td>
+                </tr>
+                <% } else{ %>
+                <tr style="color: rgb(253, 163, 178)">
+                  <th scope="row"><%= i + 1 %></th>
+                  <td><%= user.Balance[i].createdDate %></td>
+                  <td><%= user.Balance[i].Description %></td>
+                  <td></td>
+                  <td><%= user.Balance[i].Amount %></td>
+                </tr>
+                <% } %> <% } %>
+              </tbody>
             </table>
             <br>
-            <p>Total Income for <%= MonthlyReportDate %> is <%= TotalIncome%></p>
-            <p>Total Expense for <%= MonthlyReportDate %> is <%= TotalExpense%></p>
-            <p>Total Left for <%= MonthlyReportDate %> is <%= TotalLeft%></p>
+            <table class="table table-hover table-striped table-dark">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Monthly Report Date</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Total Income for</td>
+                  <td><%= MonthlyReportDate %></td>
+                  <td><%= TotalIncome%></td>
+                </tr>
+                <tr>
+                  <td>Total Income for</td>
+                  <td><%= MonthlyReportDate %></td>
+                  <td><%= TotalExpense%></td>
+                </tr>
+                <tr>
+                  <td>Total Income for</td>
+                  <td><%= MonthlyReportDate %></td>
+                  <td><%= TotalLeft%></td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
           <div class="modal-footer">
@@ -111,7 +193,7 @@
     </div>
 
     <form action="/logout" method="get">
-      <button name="logout" value="logout">Logout</button>
+      <button name="logout" value="logout" class="text-dark btn-logout">Logout</button>
     </form>
   </body>
 </html>

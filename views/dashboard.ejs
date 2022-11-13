@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     
     
+    
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
       .navbar-color {
@@ -137,21 +138,21 @@
                 </tr>
               </thead>
               <tbody>
-                <% for(var i=0; i < user.Balance.length; i++) { %> <% if(user.Balance[i].Type == 'Income'){ %>
+                <% for(var i=0; i < Balance.length; i++) { %> <% if(Balance[i].Type == 'Income'){ %>
                 <tr style="color: rgb(88, 191, 231)">
                   <th scope="row"><%= i + 1 %></th>
-                  <td><%= user.Balance[i].createdDate %></td>
-                  <td><%= user.Balance[i].Description %></td>
-                  <td><%= user.Balance[i].Amount %></td>
+                  <td><%= Balance[i].createdDate %></td>
+                  <td><%= Balance[i].Description %></td>
+                  <td><%= Balance[i].Amount %></td>
                   <td></td>
                 </tr>
                 <% } else{ %>
                 <tr style="color: rgb(253, 163, 178)">
                   <th scope="row"><%= i + 1 %></th>
-                  <td><%= user.Balance[i].createdDate %></td>
-                  <td><%= user.Balance[i].Description %></td>
+                  <td><%= Balance[i].createdDate %></td>
+                  <td><%= Balance[i].Description %></td>
                   <td></td>
-                  <td><%= user.Balance[i].Amount %></td>
+                  <td><%= Balance[i].Amount %></td>
                 </tr>
                 <% } %> <% } %>
               </tbody>
@@ -186,7 +187,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

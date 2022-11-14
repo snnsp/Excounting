@@ -77,19 +77,19 @@
         <tbody>
           <% for(var i=0; i < user.Balance.length; i++) { %> <% if(user.Balance[i].Type == 'Income'){ %>
           <tr style="color: rgb(88, 191, 231)">
-            <th scope="row"><%= i + 1 %></th>
-            <td><%= user.Balance[i].createdDate %></td>
-            <td><%= user.Balance[i].Description %></td>
-            <td><%= user.Balance[i].Amount %></td>
+            <th scope="row" style="color: rgb(88, 191, 231)"><%= i + 1 %></th>
+            <td style="color: rgb(88, 191, 231)"><%= user.Balance[i].createdDate %></td>
+            <td style="color: rgb(88, 191, 231)"><%= user.Balance[i].Description %></td>
+            <td style="color: rgb(88, 191, 231)"><%= user.Balance[i].Amount %></td>
             <td></td>
           </tr>
           <% } else{ %>
           <tr style="color: rgb(253, 163, 178)">
-            <th scope="row"><%= i + 1 %></th>
-            <td><%= user.Balance[i].createdDate %></td>
-            <td><%= user.Balance[i].Description %></td>
+            <th scope="row" style="color: rgb(253, 163, 178)" ><%= i + 1 %></th>
+            <td style="color: rgb(253, 163, 178)"><%= user.Balance[i].createdDate %></td>
+            <td style="color: rgb(253, 163, 178)"><%= user.Balance[i].Description %></td>
             <td></td>
-            <td><%= user.Balance[i].Amount %></td>
+            <td style="color: rgb(253, 163, 178)"><%= user.Balance[i].Amount %></td>
           </tr>
           <% } %> <% } %>
         </tbody>
@@ -140,19 +140,19 @@
               <tbody>
                 <% for(var i=0; i < Balance.length; i++) { %> <% if(Balance[i].Type == 'Income'){ %>
                 <tr style="color: rgb(88, 191, 231)">
-                  <th scope="row"><%= i + 1 %></th>
-                  <td><%= Balance[i].createdDate %></td>
-                  <td><%= Balance[i].Description %></td>
-                  <td><%= Balance[i].Amount %></td>
+                  <th scope="row" style="color: rgb(88, 191, 231)"><%= i + 1 %></th>
+                  <td style="color: rgb(88, 191, 231)"><%= Balance[i].createdDate %></td>
+                  <td style="color: rgb(88, 191, 231)"><%= Balance[i].Description %></td>
+                  <td style="color: rgb(88, 191, 231)"><%= Balance[i].Amount %></td>
                   <td></td>
                 </tr>
                 <% } else{ %>
                 <tr style="color: rgb(253, 163, 178)">
-                  <th scope="row"><%= i + 1 %></th>
-                  <td><%= Balance[i].createdDate %></td>
-                  <td><%= Balance[i].Description %></td>
+                  <th scope="row" style="color: rgb(253, 163, 178)"><%= i + 1 %></th>
+                  <td style="color: rgb(253, 163, 178)"><%= Balance[i].createdDate %></td>
+                  <td style="color: rgb(253, 163, 178)"><%= Balance[i].Description %></td>
                   <td></td>
-                  <td><%= Balance[i].Amount %></td>
+                  <td style="color: rgb(253, 163, 178)"><%= Balance[i].Amount %></td>
                 </tr>
                 <% } %> <% } %>
               </tbody>

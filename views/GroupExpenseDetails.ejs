@@ -160,8 +160,8 @@
                                     <form action="/GroupExpense/ActivateGroup/<%= group._id%>" method = "POST">
                                         <input type="hidden" value = "ManualShare" name="type">
                                         <% for(var i=0; i < group.GroupMember.length; i++) { %>
-                                            <label style="color: white;">Amout to Paid for <%= group.GroupMember[i].Member.firstname%> <%= group.GroupMember[i].Member.lastname%></label>
-                                            <input type="Number" name="AmountToPaid[]" required>
+                                            <label style="color: white;"> <%= group.GroupMember[i].Member.firstname%> <%= group.GroupMember[i].Member.lastname%></label>
+                                            <input type="Number" name="AmountToPaid[]" required><br>
                                         <% } %>
                                         <br>
                                         <button type="submit" class="btn btn-monthly" >Manual Share</button>

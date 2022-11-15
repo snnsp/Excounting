@@ -13,23 +13,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
+async function pushBalanceData(id, data) {
+  await User.findByIdAndUpdate(id, { $push:  data  });
+}
+
 module.exports = {
   postAddBalance: async (req, res) => {
     const token = req.cookies.access_token;
     const decoded = jwt.verify(token, config.TOKEN_KEY);
     req.user = decoded;
-
-    const user = await User.findByIdAndUpdate(req.user.user_id,{ $push:{
-        Balance:{
-            Description: req.body.Description,
-            Amount: req.body.Balance,
-            Type: req.body.Type,
-            createdDate: Date.now(),
-          }
-    }
+    const user = pushBalanceData(req.user.user_id, {
+      Balance: {
+        Description: req.body.Description,
+        Amount: req.body.Balance,
+        Type: req.body.Type,
+        createdDate: Date.now(),
+      },
     });
 
-
-    res.redirect('/dashboard')
+    res.redirect("/dashboard");
   },
 };

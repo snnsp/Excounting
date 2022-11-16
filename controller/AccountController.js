@@ -14,7 +14,13 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 async function pushBalanceData(id, data) {
-  await User.findByIdAndUpdate(id, { $push:  data  });
+  const user = await User.findByIdAndUpdate(id, { $push:  data  });
+  console.log(user)
+  return user
+}
+
+function plus(n1,n2){
+  return n1+n2
 }
 
 module.exports = {
@@ -33,4 +39,6 @@ module.exports = {
 
     res.redirect("/dashboard");
   },
+  plus: plus,
+  pushBalanceData: pushBalanceData
 };

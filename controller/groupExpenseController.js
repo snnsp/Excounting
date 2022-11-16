@@ -15,6 +15,43 @@ app.use(bodyParser.urlencoded({ extended:true }))
 app.use(express.static('public'))
 app.use(cookieParser());
 
+async function AddNewMember(member, groupID){
+
+        const group = await GroupExpense.findById(groupID)
+        var isExist = false;
+        for(i=0; i<group.GroupMember.length; i++){
+            if(group.GroupMember[i].Member.equals(member._id)){
+                isExist = true
+                break;
+            }
+        }
+        if(!isExist){
+            const updateData = {Member: member._id}
+            await GroupExpense.updateOne(
+                { _id: groupID }, 
+                { $push: { GroupMember: updateData } }
+            );
+        }
+}
+
+async function ActivateGroup(groupID, type, AmountToPaid){
+    var group = await GroupExpense.findById(groupID)
+
+    if(type == 'EqualShare'){
+        const AmountToPaid = group.AmountToPaid / group.GroupMember.length
+        for(i=0; i<group.GroupMember.length; i++){
+            group.GroupMember[i].AmountToPaid = AmountToPaid
+        }
+    }
+    else if(type == 'ManualShare'){
+        for(i=0; i<group.GroupMember.length; i++){
+            group.GroupMember[i].AmountToPaid = AmountToPaid[i]
+        }
+    }
+    group.GroupStatus = 'OnGoing'
+    await GroupExpense.findByIdAndUpdate(groupID, group)
+}
+
 module.exports = {
     getGroupExpense :async (req,res)=>{
         const token = req.cookies.access_token;
@@ -78,21 +115,7 @@ module.exports = {
         }
 
         if(member != null){
-        const group = await GroupExpense.findById(req.params.groupID)
-        var isExist = false;
-        for(i=0; i<group.GroupMember.length; i++){
-            if(group.GroupMember[i].Member == req.body.MemberID){
-                isExist = true
-                break;
-            }
-        }
-        if(!isExist){
-            const updateData = {Member: req.body.MemberID}
-            await GroupExpense.updateOne(
-                { _id: req.params.groupID }, 
-                { $push: { GroupMember: updateData } }
-            );
-        }
+            AddNewMember(member, req.params.groupID)
         }
 
         res.redirect('/GroupExpense/' + req.params.groupID)
@@ -103,21 +126,7 @@ module.exports = {
         const decoded = jwt.verify(token, config.TOKEN_KEY);
         req.user = decoded;
 
-        var group = await GroupExpense.findById(req.params.groupID)
-
-        if(req.body.type == 'EqualShare'){
-            const AmountToPaid = group.AmountToPaid / group.GroupMember.length
-            for(i=0; i<group.GroupMember.length; i++){
-                group.GroupMember[i].AmountToPaid = AmountToPaid
-            }
-        }
-        else if(req.body.type == 'ManualShare'){
-            for(i=0; i<group.GroupMember.length; i++){
-                group.GroupMember[i].AmountToPaid = req.body.AmountToPaid[i]
-            }
-        }
-        group.GroupStatus = 'OnGoing'
-        await GroupExpense.findByIdAndUpdate(req.params.groupID, group)
+        ActivateGroup(req.params.groupID, req.body.type, req.body.AmountToPaid)
         res.redirect('/GroupExpense/' + req.params.groupID)
     },
     ApproveExpense :async (req,res)=>{

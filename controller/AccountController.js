@@ -34,4 +34,4 @@ module.exports = {
     res.redirect("/dashboard");
   },
   pushBalanceData: pushBalanceData
-};
+}; 

@@ -15,6 +15,7 @@ app.use(cookieParser());
 
 async function pushBalanceData(id, data) {
   const user = await User.findByIdAndUpdate(id, { $push:  data  });
+  return user
 }
 
 module.exports = {

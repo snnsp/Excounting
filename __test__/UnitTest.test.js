@@ -1,14 +1,9 @@
-const AccountController = require("../controller/AccountController")
+//const AccountController = require("../controller/AccountController");
+const User = require("../model/user");
 
-it('should get 2', () => {
-  const result = AccountController.plus(1,2)
+describe("TestMock", () => {
+  it("Post Add balance", () => {
+    
+  });
 
-  // Assertion
-  expect(result).toEqual(3)
-})
-
-it('Push data to account', () => {
-  console.log("Hello")
-  // Assertion
-  
-})
+});

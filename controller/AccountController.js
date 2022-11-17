@@ -15,12 +15,6 @@ app.use(cookieParser());
 
 async function pushBalanceData(id, data) {
   const user = await User.findByIdAndUpdate(id, { $push:  data  });
-  console.log(user)
-  return user
-}
-
-function plus(n1,n2){
-  return n1+n2
 }
 
 module.exports = {
@@ -28,7 +22,7 @@ module.exports = {
     const token = req.cookies.access_token;
     const decoded = jwt.verify(token, config.TOKEN_KEY);
     req.user = decoded;
-    const user = pushBalanceData(req.user.user_id, {
+    pushBalanceData(req.user.user_id, {
       Balance: {
         Description: req.body.Description,
         Amount: req.body.Balance,
@@ -36,9 +30,7 @@ module.exports = {
         createdDate: Date.now(),
       },
     });
-
     res.redirect("/dashboard");
   },
-  plus: plus,
   pushBalanceData: pushBalanceData
 };

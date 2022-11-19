@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668667787423" clover="3.2.0">
-  <project timestamp="1668667787423" name="All files">
-    <metrics statements="24" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1" elements="26" coveredelements="20" complexity="0" loc="24" ncloc="24" packages="2" files="2" classes="2"/>
+<coverage generated="1668753983284" clover="3.2.0">
+  <project timestamp="1668753983284" name="All files">
+    <metrics statements="23" coveredstatements="17" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0" elements="26" coveredelements="17" complexity="0" loc="23" ncloc="23" packages="2" files="2" classes="2"/>
     <package name="controller">
-      <metrics statements="21" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
-      <file name="AccountController.js" path="C:\Users\ADMIN\Desktop\Software QA\Excounting\controller\AccountController.js">
-        <metrics statements="21" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <metrics statements="20" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="AccountController.js" path="C:\Users\User\Desktop\QA\Excounting\controller\AccountController.js">
+        <metrics statements="20" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -19,19 +19,18 @@
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
       </file>
     </package>
     <package name="model">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="user.js" path="C:\Users\ADMIN\Desktop\Software QA\Excounting\model\user.js">
+      <file name="user.js" path="C:\Users\User\Desktop\QA\Excounting\model\user.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>

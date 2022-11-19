@@ -18,11 +18,13 @@ async function pushBalanceData(id, data) {
   return user
 }
 
+function decoded(token){
+  return jwt.verify(token, config.TOKEN_KEY);
+}
+
 module.exports = {
   postAddBalance: async (req, res) => {
-    const token = req.cookies.access_token;
-    const decoded = jwt.verify(token, config.TOKEN_KEY);
-    req.user = decoded;
+    req.user = decoded(req.cookies.access_token);
     pushBalanceData(req.user.user_id, {
       Balance: {
         Description: req.body.Description,
@@ -33,5 +35,6 @@ module.exports = {
     });
     res.redirect("/dashboard");
   },
-  pushBalanceData: pushBalanceData
+  pushBalanceData: pushBalanceData,
+  decoded: decoded
 }; 

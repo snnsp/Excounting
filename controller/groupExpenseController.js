@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const config = process.env;
+const AccountController = require("../controller/AccountController")
 
 
 app.use(express.json())
@@ -54,9 +55,7 @@ async function ActivateGroup(groupID, type, AmountToPaid){
 
 module.exports = {
     getGroupExpense :async (req,res)=>{
-        const token = req.cookies.access_token;
-        const decoded = jwt.verify(token, config.TOKEN_KEY);
-        req.user = decoded;
+        req.user = AccountController.decoded(req.cookies.access_token);
 
         const group = await GroupExpense.find({$or:[
             {GroupLeader: req.user.user_id},
@@ -70,9 +69,7 @@ module.exports = {
     },
 
     createNewGroupExpense :async(req,res)=>{
-        const token = req.cookies.access_token;
-        const decoded = jwt.verify(token, config.TOKEN_KEY);
-        req.user = decoded;
+        req.user = AccountController.decoded(req.cookies.access_token);
 
         const group = await GroupExpense.create({
             GroupName: req.body.GroupName,
@@ -84,9 +81,7 @@ module.exports = {
     },
 
     getGroupDetails :async(req,res)=>{
-        const token = req.cookies.access_token;
-        const decoded = jwt.verify(token, config.TOKEN_KEY);
-        req.user = decoded;
+        req.user = AccountController.decoded(req.cookies.access_token);
 
         const group = await GroupExpense.findById(req.params.groupID)
         .populate('GroupLeader', 'firstname lastname').populate('GroupMember.Member', 'firstname lastname')
@@ -104,9 +99,7 @@ module.exports = {
         })
     },
     AddNewMember :async(req,res)=>{
-        const token = req.cookies.access_token;
-        const decoded = jwt.verify(token, config.TOKEN_KEY);
-        req.user = decoded;
+        req.user = AccountController.decoded(req.cookies.access_token);
         var member = null
         try{
         member = await User.findById(req.body.MemberID, '_id')
@@ -122,17 +115,13 @@ module.exports = {
     },
 
     ActivateGroup :async (req,res)=>{
-        const token = req.cookies.access_token;
-        const decoded = jwt.verify(token, config.TOKEN_KEY);
-        req.user = decoded;
+        req.user = AccountController.decoded(req.cookies.access_token);
 
         ActivateGroup(req.params.groupID, req.body.type, req.body.AmountToPaid)
         res.redirect('/GroupExpense/' + req.params.groupID)
     },
     ApproveExpense :async (req,res)=>{
-        const token = req.cookies.access_token;
-        const decoded = jwt.verify(token, config.TOKEN_KEY);
-        req.user = decoded;
+        req.user = AccountController.decoded(req.cookies.access_token);
 
         var group = await GroupExpense.findById(req.params.groupID)
         var complete_count = 0

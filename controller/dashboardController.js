@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const config = process.env;
+const AccountController = require("../controller/AccountController")
 
 
 app.use(express.json())
@@ -40,9 +41,7 @@ function getMonthlyReportData(UserAccount){
 module.exports = {
 
     getDashboard :async (req,res)=>{ 
-        const token = req.cookies.access_token;
-        const decoded = jwt.verify(token, config.TOKEN_KEY);
-        req.user = decoded;
+        req.user = AccountController.decoded(req.cookies.access_token);
 
         const user = await User.findById(req.user.user_id)
 

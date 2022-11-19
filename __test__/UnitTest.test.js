@@ -1,7 +1,8 @@
 const AccountController = require("../controller/AccountController");
 const User = require("../model/user");
+const jwt = require("jsonwebtoken");
 
-describe("TestMock", () => {
+describe("Test AccountController", () => {
 
   const mockedBalanceData = {
     item: "Hello"
@@ -12,31 +13,43 @@ describe("TestMock", () => {
     username: 'test',
   }
 
+  const mockRequest = {
+    cookies: {
+      access_token: "test"
+    },
+    body:{
+      Balance: {
+        Description: "Mocked Data",
+        Amount: 500,
+        Type: "Income",
+        createdDate: Date.now(),
+      }
+    }
+  };
+
   let findByIdAndUpdate
 
   beforeAll(() => {
     findByIdAndUpdate = jest.spyOn(User, 'findByIdAndUpdate');
     findByIdAndUpdate.mockReturnValue(mockedBalanceData);
 
-    decoded = jest.spyOn(AccountController, 'decoded');
+    decoded = jest.spyOn(jwt, 'verify');
     decoded.mockReturnValue(mockedUserToken)
 
-  });
+    res = {
+      redirect: jest.fn(),
+    }
 
-  afterEach(() => {
-    findByIdAndUpdate.mockRestore()
   });
   
 
   it("Push Balance Data",  async () => {
     const response = await AccountController.pushBalanceData("test", "test");
-    console.log(response)
-    
   });
 
   it("Post Add Balance ",  async () => {
-    const response = await AccountController.postAddBalance()
-    console.log(response)
+    
+    const response = await AccountController.postAddBalance(mockRequest,res)
     
   });
 

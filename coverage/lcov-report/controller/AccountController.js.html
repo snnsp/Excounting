@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/20</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/20</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -119,18 +119,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -138,7 +138,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,19 +158,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cookieParser());
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >pushBalanceData(</span>id, data) {
-  const user = <span class="cstat-no" title="statement not covered" >await User.findByIdAndUpdate(id, { $push:  data  });</span>
-<span class="cstat-no" title="statement not covered" >  return user</span>
+async function pushBalanceData(id, data) {
+  const user = await User.findByIdAndUpdate(id, { $push:  data  });
+  return user
 }
 &nbsp;
-function <span class="fstat-no" title="function not covered" >decoded(</span>token){
-<span class="cstat-no" title="statement not covered" >  return jwt.verify(token, config.TOKEN_KEY);</span>
+function decoded(token){
+  return jwt.verify(token, config.TOKEN_KEY);
 }
 &nbsp;
 module.exports = {
-  postAddBalance: <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    req.user = decoded(req.cookies.access_token);</span>
-<span class="cstat-no" title="statement not covered" >    pushBalanceData(req.user.user_id, {</span>
+  postAddBalance: async (req, res) =&gt; {
+    req.user = decoded(req.cookies.access_token);
+    pushBalanceData(req.user.user_id, {
       Balance: {
         Description: req.body.Description,
         Amount: req.body.Balance,
@@ -178,7 +178,7 @@ module.exports = {
         createdDate: Date.now(),
       },
     });
-<span class="cstat-no" title="statement not covered" >    res.redirect("/dashboard");</span>
+    res.redirect("/dashboard");
   },
   pushBalanceData: pushBalanceData,
   decoded: decoded
@@ -190,7 +190,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-11-18T06:46:23.269Z
+                at 2022-11-19T07:33:58.082Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -33,8 +33,8 @@ describe("Test AccountController", () => {
     findByIdAndUpdate = jest.spyOn(User, 'findByIdAndUpdate');
     findByIdAndUpdate.mockReturnValue(mockedBalanceData);
 
-    decoded = jest.spyOn(jwt, 'verify');
-    decoded.mockReturnValue(mockedUserToken)
+    verify = jest.spyOn(jwt, 'verify');
+    verify.mockReturnValue(mockedUserToken)
 
     res = {
       redirect: jest.fn(),

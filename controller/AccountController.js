@@ -25,7 +25,7 @@ function decoded(token){
 module.exports = {
   postAddBalance: async (req, res) => {
     req.user = decoded(req.cookies.access_token);
-    pushBalanceData(req.user.user_id, {
+    await pushBalanceData(req.user.user_id, {
       Balance: {
         Description: req.body.Description,
         Amount: req.body.Balance,

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668847407232" clover="3.2.0">
-  <project timestamp="1668847407232" name="All files">
+<coverage generated="1669002374903" clover="3.2.0">
+  <project timestamp="1669002374903" name="All files">
     <metrics statements="23" coveredstatements="23" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3" elements="26" coveredelements="26" complexity="0" loc="23" ncloc="23" packages="2" files="2" classes="2"/>
     <package name="controller">
       <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-      <file name="AccountController.js" path="C:\Users\ADMIN\Desktop\Software QA\Excounting\controller\AccountController.js">
+      <file name="AccountController.js" path="C:\Users\User\Desktop\QA\Excounting\controller\AccountController.js">
         <metrics statements="20" coveredstatements="20" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -30,7 +30,7 @@
     </package>
     <package name="model">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="user.js" path="C:\Users\ADMIN\Desktop\Software QA\Excounting\model\user.js">
+      <file name="user.js" path="C:\Users\User\Desktop\QA\Excounting\model\user.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>

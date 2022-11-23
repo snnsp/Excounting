@@ -2,6 +2,21 @@ const AccountController = require("../controller/AccountController");
 const User = require("../model/user");
 const jwt = require("jsonwebtoken");
 
+/*
+Unit Test 1 Test PushBalanceData Function
+Using the graph coverage to this function we will get
+
+  async function pushBalanceData(id, data) {
+  const user = await User.findByIdAndUpdate(id, { $push:  data  }); --> 1
+  return user --> 2
+}
+Test Requirement: [1,2]
+Test Path: [1,2]
+EPC satisfied by T1
+Test case value = mockedBalanceData
+Expected Output is expected variable below and findByIdAndUpdate function need to be called 
+*/
+
 describe("Test pushBalanceData Function ", () => {
 
   const mockedBalanceData = {
@@ -57,6 +72,20 @@ describe("Test pushBalanceData Function ", () => {
   });
 });
 
+/*
+Unit Test 2 Test Decoded Function
+Using the graph coverage to this function we will get
+
+function decoded(token){
+  return jwt.verify(token, config.TOKEN_KEY); --> 1
+}
+
+Test Requirement: [1]
+Test Path: [1]
+EPC satisfied by T1
+Test case value = mockedUserToken
+Expected Output is expected variable below and verify function has to be called
+*/
 describe("Test Decoded Method ", () => {
 
   const mockedUserToken = {
@@ -81,6 +110,29 @@ describe("Test Decoded Method ", () => {
   });
 });
 
+/*
+Unit Test 3 Test postAddBalance API
+Using the graph coverage to this function we will get
+
+postAddBalance: async (req, res) => {
+    req.user = decoded(req.cookies.access_token); --> 1
+    await pushBalanceData(req.user.user_id, { --> 2
+      Balance: {
+        Description: req.body.Description,
+        Amount: req.body.Balance,
+        Type: req.body.Type,
+        createdDate: Date.now(),
+      },
+    });
+    res.redirect("/dashboard"); --> 3
+  }
+
+Test Requirement: [1,2,3]
+Test Path: [1,2,3]
+EPC satisfied by T1
+Test case value = (mockRequest,res)
+Expected Output is expected variable below and findByIdAndUpdate,verify,res.redirect function must be called
+*/
 describe("Test postAddBalance Method ", () => {
 
   const mockRequest = {

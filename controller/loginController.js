@@ -40,7 +40,7 @@ module.exports = {
                 );
 
                 user.token = token;
-                res.cookie("access_token", user.token, { expires: new Date(Date.now() + 9000000), httpOnly: true, secure: true }) //Create cookies
+                res.cookie("access_token", user.token, { expires: new Date(Date.now() + 9000000) }) //Create cookies
                 console.log("Created Cookies")
                 return res.status(200).redirect('/dashboard') 
               }
